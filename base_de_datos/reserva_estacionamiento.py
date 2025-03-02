@@ -61,6 +61,7 @@ class Estacionamientos(EasyModel, table=True):
     precio_semana: float = Field(..., description="Precio por semana")
     precio_mes: float = Field(..., description="Precio por mes")
     #precios por rango de fechas(para temporadas altas bajas)
+    
 class Reserva(EasyModel, table=True):
     """
     Reservas para los estacionamientos
