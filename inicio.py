@@ -4,24 +4,22 @@ import asyncio
 from async_easy_model import init_db  # Importa la función init_db
 from db_config import configure_sqlite  # importa la configuración del engine
 
-# Configura el engine
 def startup_db_reservas_estacionamiento():
-    # Crea el engine con la configuración de la base de datos
     engine = configure_sqlite('base_de_datos/reservas_estacionamiento.db')
-
-    # Llama a init_db pasándole el engine
     asyncio.create_task(init_db(engine))  # Usamos create_task para correr la tarea asíncrona
     print("Base de datos creada correctamente")
 
-# Servidor
 server_instance = Server(
     title="Reserva de Estacionamientos",
-    routes_dir=Path(__file__).parent / "paginas",
-    on_startup=startup_db_reservas_estacionamiento,  # Asegúrate de que esta función esté definida
-    ui={
-        "language": "es"
-    }
+    routes_dir=Path(__file__).parent / "paginas",  # Verifica que esté correcto
+    on_startup=startup_db_reservas_estacionamiento,
+    ui={"language": "es"}
 )
+
+# Verifica las rutas registradas
+print("Rutas registradas:")
+for route in server_instance.app.router.routes:
+    print(route)
 
 app = server_instance.app
 
