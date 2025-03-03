@@ -3,9 +3,9 @@ from sqlmodel import Relationship,Field
 from typing import List, Optional
 from pydantic import EmailStr
 from datetime import datetime
+from db_config import configure_sqlite
 
-
-db_config.configure_sqlite('base_de_datos/reservas_estacionamiento.db')
+engine = configure_sqlite('base_de_datos/reservas_estacionamiento.db')
 
 class Usuarios(EasyModel, table=True):
     """
